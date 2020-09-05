@@ -45,7 +45,7 @@ void Start()
 }
 ```
 
-#### Or set it up on Scene directly
+#### Or set it up directly on Scene
 
 Also, if you want to create a PCharacterInstance directly in Hierarchy, just create an Empty object and add the **PCharacterInstance** component to it. After defining its base and set it up its Name, unity will automatically define the rest of the values for you.
 
