@@ -3,13 +3,12 @@ An easy way to create 2D characters for your Unity Games without using Animator 
 
 ## Setup
 
-Depois de ter baixado o PCharacter, apenas importe a pasta para o seu projeto Unity.<br>
-Em questão de performance, PCharacter utilizar o SpriteAtlas da Unity na hora de renderizar os frames do personagem. <br> 
-Dito isso, para todo personagem que for criar no seu jogo utilizando o PCharacter, é necessário que tenha criado um SpriteAtlas para ele também.
+Import the PCharacter folder into your Unity's project after downloaded the Library.<br>
+PCharacter uses SpriteAtlas from unity to render every created character.
 
 ## Create your Character
 
-O gif abaixo demonstra todo o processo da criação de um PCharacter e as suas animações.
+The gif below demonstrates the whole process of creating and setting up the PCharacter animation.
 
 <p align="center"> 
 <img src="https://media.giphy.com/media/efPKFgVjHuEO7BoUZV/giphy.gif" style="max-height: 300px;">
@@ -17,28 +16,27 @@ O gif abaixo demonstra todo o processo da criação de um PCharacter e as suas a
 
 ### Explanation 
 
-- Existem dois tipos de PCharacter, o CHARACTER e o SOLID. A única diferença entre eles é o Rigidbody, se o PCharacter creado for do tipo SOLID, ele não irá ter um Rigidbody aplicado
-em seus componentes.
+- There are two types of PCharacter, the CHARACTER, and SOLID ones. The only difference between them is that SOLID does not use Rigidbody2D. So, if the created PChracter is from SOLID type, it will not have physics to be applied on. 
 
-- Os PCharacters utilizam uma GlobalConfiguration para ajudar a definir os valores globais que todos os personagem irão ter - Velocidade da animação, gravidade,
-freeze rotation, etc... -. Dentro da pasta do PCharacter já tem um criado como padrão. 
+- The PCharacters uses a GlobalConfiguration to defines all global values for every instantiated character of that PCharacter - Such as animation speed, gravity, freeze rotation, etc -. Inside PCharacter's folder, there is already a GlobalConfiguration created by default.
 
 - **Update atlas before adding new animations:** Antes de adicionar novas animações para os personagens o PCharacter precisa de um SpriteAtlas de onde ele vai definir os sprites
 de cada frame.
 
-## Adding your character to the game
+- **Update atlas before adding new animations:** Before adding any animations to the PCharacters, make sure that you've already created a SpriteAtlas and set it up in Character Atlas field. After that, click on _Update atlas_ button to update it sprites.
 
-- Todos os Character criados no seu projeto servirão de base para os Character Instances presentens no seu jogo, são eles que serão adicionados na sua cena.
+## Adding your characters to the game
 
-- Todos os comandos relacionados ao PCharacter são encontrados dentro da namespace PCharacter <br>
+- Every PCharacter will serve as a base to instantiate the PCharacterInstances. 
+
+- All commands related to PCharacter will be in PCharacter namespace<br>
 ```cs
 using namespace PCharacter;
 ```
 
 ##### Creating PCharacter instance from base:
 
-Para instanciar um novo PCharacterInstance atráves de uma base criada, apenas utilize a função **CreateInstanceFromBase**.
-
+To instantiate a new PCharacterInstance from base, just uses the **CreateInstanceFromBase** command in PCharacterInstanceUtil class.
 
 ```cs
 public Character Base;
@@ -52,14 +50,13 @@ void Start()
 
 #### Or set it up on Scene directly
 
-Se quiser também, pode criar um objecto vazio na cena e adicionar o componenent **PCharacterInstance**, definir a base dele e um nome. Assim, autimaticamente o sprite do personagem
-será definido junto com seu Rigidbody e seu BoxCollider2D
+Also, if you want to create a PCharacterInstance directly in Hierarchy, just create an Empty object and add the **PCharacterInstance** component to it. After defining its base and set it up its Name, unity will automatically define the rest of the values for you.
 
 ## Playing animations
 
 It will need two main functions to play and update animations with PCharacter:
-- **SetInstanceAnimation:** Defines what animation will be played to the character
-- **UpdateInstanceAnimation:** Updates the current animation. Put it inside the Update function
+-  **SetInstanceAnimation:** Defines what animation will be played to the character
+-  **UpdateInstanceAnimation:** Updates the current animation. Put it inside the Update function
 
 Example:
 ```cs
@@ -83,12 +80,11 @@ void Update()
 
 ## Controlling the PCharacterInstance
 
-Sinta-se livre para implementar os movimentos do PCharacterInstance, mas o PCharacter Lybrari já tem uma implementação bem básica para os movimentos do personagem,
-como andar e pular.
+Feel free to implement the movements as you want to the PCharacterInstance, but the PCharacter lib already has a basic implementation of basic movements for you to use - Walk and Jump -.
 
-Para isso, irão ser necessárias duas funções:<br>
-- **AddInstanceControllerAction:** Adiciona um tipo de ação para o PCharacterInstance realizar - As ações podem ser entre: **TRANSLATE_LEFT, TRANSLATE_RIGHT, JUMP**.
-- **UpdateInstanceController:** Atualiza a lista de ações que o PCharacterInstance tem.
+It will need two main functions to controll your PCharacterInstance:<br>
+- **AddInstanceControllerAction:** Adds actions type for the PCharacterInstance to use - Actions can be: **TRANSLATE_LEFT, TRANSLATE_RIGHT, JUMP**.
+- **UpdateInstanceController:** Updates every added action in PCharacterInstance.
 
 Example:
 ```cs
@@ -127,12 +123,12 @@ void Update()
 
 Here some more functions that can be usefull for your programming:
 
-- **IsCharacterGrounded:** Retorna se o posonagem está encostado no chão ou não.
+- **IsCharacterGrounded:** Returns if the character is raycast detecting a certain layer.
 ```cs
 public static bool IsCharacterGrounded(Vector2 detectorOrigin, float radius, LayerMask groundLayer) { ... }
 ```
 
-- **BreakControllerWhenFacingWall:** Evita que o personagem fique andando constantemente contra uma parede
+- **BreakControllerWhenFacingWall:** Breaks all actions to avoid walk against every facing wall
 ```cs
 public static void BreakControllerWhenFacingWall(IPCharacterInstance instance, LayerMask targetLayer, float detectorDistance = 1f) { ... }
 ```
