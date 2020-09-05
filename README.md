@@ -20,9 +20,6 @@ The gif below demonstrates the whole process of creating and setting up the PCha
 
 - The PCharacters uses a GlobalConfiguration to defines all global values for every instantiated character of that PCharacter - Such as animation speed, gravity, freeze rotation, etc -. Inside PCharacter's folder, there is already a GlobalConfiguration created by default.
 
-- **Update atlas before adding new animations:** Antes de adicionar novas animações para os personagens o PCharacter precisa de um SpriteAtlas de onde ele vai definir os sprites
-de cada frame.
-
 - **Update atlas before adding new animations:** Before adding any animations to the PCharacters, make sure that you've already created a SpriteAtlas and set it up in Character Atlas field. After that, click on _Update atlas_ button to update it sprites.
 
 ## Adding your characters to the game
