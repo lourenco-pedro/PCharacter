@@ -1,6 +1,8 @@
 # PCharacter
 An easy way to create 2D characters for your Unity Games without using Animator and animations clip.
 
+If you guys have any feedback about the code - It architecture, performance, etc - I'll be glad to read them in my email pedropereralourenco@gmail.com.
+
 ## Setup
 
 Import the PCharacter folder into your Unity's project after downloaded the Library.<br>
